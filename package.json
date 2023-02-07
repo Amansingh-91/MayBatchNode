@@ -1,0 +1,23 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amansingh-91/MayBatchNode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Amansingh-91/MayBatchNode/issues"
+  },
+  "homepage": "https://github.com/Amansingh-91/MayBatchNode#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

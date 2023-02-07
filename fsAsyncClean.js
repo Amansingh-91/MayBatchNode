@@ -9,7 +9,13 @@ const util = require('util');
 const readFilePromise = util.promisify(readFile);
 const writeFilePromise = util.promisify(writeFile);
 
-
+const printData =async()=>{
+    const first = await readFilePromise("./myFolder/first.txt","utf8");
+    const second = await readFilePromise("./myFolder/second.txt","utf8");
+    console.log(first,second);
+    await writeFilePromise("./myFolder/forth.txt",`This is AWESOME:, ${first}, ${second}`,{flag:"a"});
+}
+printData();
 
 // const getText = (path) => {
 //   return new Promise((resolve, reject) => {
@@ -22,20 +28,6 @@ const writeFilePromise = util.promisify(writeFile);
 //   });
 // };
 
-
-// const readFilePromise = async()=>{
-//     const first = await getText("./myFolder/first.txt");
-//     const second= await     getText("./myFolder/second.txt");
-//     console.log(first,second);
-// }
-
-const printData =async()=>{
-    const first = await readFilePromise("./myFolder/first.txt","utf8");
-    const second = await readFilePromise("./myFolder/second.txt","utf8");
-    console.log(first,second);
-    await writeFilePromise("./myFolder/forth.txt",`This is AWESOME:, ${first}, ${second}`,{flag:"a"});
-}
-printData();
 
 // getText("./myFolder/first.txt")
 //     .then((result)=>{
