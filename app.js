@@ -1,28 +1,23 @@
-//  three types of modules
-//  user defined
-//  inbuilt
-//  third party
+const {createConnection} = require("./database");
 
-const http = require("http");
+const getData = async()=>{
+    let db = await createConnection("Practice");
+    let collection = db.collection('Student');
+    let data = await collection.find().count();
+    console.log(data);
+}
 
-const server =  http.createServer((req,res)=>{
-    const url = req.url;
-    const method = req.method;
-    console.log(url,method);
-    if(url === "/" && method == "GET"){
-        res.end("<h1>Home page</h1>");
-    }
-    else if(url === "/about" && method == "GET"){
-        res.end("<h1>about page</h1>");
-    }
-    else if(url === "/contactus" && method == "GET"){
-        res.end("<h1>contact us page</h1>");
-    }
-    else{
-        res.end("<h1>page not found</h1>");
-    }
-});
 
-server.listen(5000,()=>{
-    console.log("listening on port 5000");
-});
+const insertData = async(data)=>{
+    let db = await createConnection("Practice");
+    let collection = db.collection('Student');
+    let res = await collection.insertOne(data);
+    console.log(res);
+}
+
+// insertData({
+//     'name':"jack",
+//     'age':35
+// })
+
+getData();
