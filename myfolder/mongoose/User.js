@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 
-const usesrSchema =  new mongoose.Schema({
-    name:String,
+
+const userSchema =  new mongoose.Schema({
+    Firstname:String,
+    Lastname:String,
     age:{
         type:Number,
         min:1,
@@ -30,12 +32,75 @@ const usesrSchema =  new mongoose.Schema({
     },
     hobbies:[String],
 
-    bestFriend: {
+    bestFriend: [{
         type:mongoose.SchemaTypes.ObjectId,
         ref:"user"
-    },
+    }],
+    AccountDetails:{
+        AccountNumber:{
+            type:Number
+        },
+        balance:{
+            type:Number
+        }
+    }
+    
+     
+    
 
 
 });
 
-module.exports = mongoose.model("user",usesrSchema);
+userSchema.method("sayHi" ,function(){
+   console.log(`Hi,my name is ${this.Firstname}`);
+})
+
+userSchema.statics.findByName = function(name){
+    return this.where({name: new RegExp(name,"i")});
+}
+
+userSchema.query.byName = function (name) {
+    return this.where({name: new RegExp(name,"i")});
+}
+
+userSchema.virtual("FullName").get(
+    function () {
+        return `${this.Firstname} ${this.Lastname}`;
+    }
+)
+// Middleware
+userSchema.pre("save",function(next){
+    console.log("In middleware");
+    this.updatedAt = Date.now();
+    next();
+}); 
+
+userSchema.post("save",function(doc,next){
+    doc.sayHi();
+    next();
+});
+
+
+module.exports = mongoose.model("user",userSchema);
+
+const customerSchema =  new mongoose.Schema({
+    name:String,
+    orders: [
+        {
+            type:mongoose.SchemaTypes.ObjectId,
+            ref:"order",
+        }
+    ]
+})
+
+const orderSchema = new mongoose.Schema({
+    orderType:String,
+    orderVaue:Number,
+    customerId: {
+        type:mongoose.SchemaTypes.ObjectId,
+        ref:"customer",
+    }
+})
+
+module.exports = mongoose.model("order",orderSchema);
+module.exports = mongoose.model("customer",customerSchema);

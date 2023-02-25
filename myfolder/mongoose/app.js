@@ -23,13 +23,18 @@ async function run(){
     // second way of storing
 
     // const secondUser = await User.create({
-    //     name:"Divya",
+    //     Firstname:"Div",
+    //     Lastname:"rathore",
     //     age:26,
-    //     email:"Divya@gmail.com",
+    //     email:"Div@gmail.com",
     //     createdAt: Date.now(),
     //     updatedAt: Date.now(),
     //     hobbies:["cooking","farming"]
-    // })
+    // });
+
+    // console.log(secondUser.FullName);
+
+    
 
     // console.log(secondUser);
     // 63f4e0ec364051b03e5a3cd8
@@ -41,7 +46,7 @@ async function run(){
 
     // console.log(user);
 
-    // testing schema properties
+    // testing schema properties and validation
 
     // const secondUser = await User.create({
     //     name:"jack",
@@ -53,9 +58,18 @@ async function run(){
 
     // querying in mongoose
 
-    const user =await User.where("name").equals("Dharam").where("age").gt(29);
+    // const user =await User.where("age").gt(25).byName("Div");
+    // // user.sayHi();
+    // console.log(user);
 
-    console.log(user);
+    
+    // await User.deleteMany({});
+
+    // const user =  await User.where("Firstname").equals("Dharam");
+    // // console.log(user);
+    // user[0].Firstname = "Dharamveer";
+    // const newName = await user[0].save();
+    
 
 
 
